@@ -15,7 +15,7 @@ libro (Libro)
 fecha_desde (date)
 fecha_hasta (date)
 fecha_dev (?date) este atributo se debe inicializar en null*/
-    private $id_prestamo;
+   
      /** @var Socio*/
     private $socio;
      /** @var Libro*/
@@ -24,14 +24,14 @@ fecha_dev (?date) este atributo se debe inicializar en null*/
     private $fecha_hasta;
     private $fecha_dev;
 
-    public function __construct(int $id_prestamo, 
+    public function __construct(int $id, 
                 Socio $socio, 
                 Libro $libro,
                 DateTime $fecha_desde,
                 DateTime $fecha_hasta,
                 DateTime $fecha_dev)
     {
-        $this->id_prestamo=$id_prestamo;
+        parent::__construct($id);
         $this->socio=$socio; /* id del socio */
         $this->libro=$libro; /*id del libro*/
         $this->fecha_desde=$fecha_desde;
@@ -39,10 +39,7 @@ fecha_dev (?date) este atributo se debe inicializar en null*/
         $this->fecha_dev=null;
     }
 
-    public function getId_prestamo ()
-    {
-        return $this->id_prestamo;
-    }
+   
 
     public function setFecha_dev ($nueva_fecha_dev)
     {
@@ -94,4 +91,33 @@ fecha_dev (?date) este atributo se debe inicializar en null*/
         return $this->socio;
     }    
 
+    public function serializar(): array
+    {
+        return [
+            /* 
+            socio (Socio)
+            libro (Libro)
+            fecha_desde (date)
+            fecha_hasta (date)
+            fecha_dev 
+            */
+            'id'=>$this->getId(),
+            'socio'=>$this->socio,
+            'libro'=>$this->libro,
+            'fecha_desde'=>$this->fecha_desde,
+            'fecha_hasta'=>$this->fecha_hasta,
+            'fecha_dev'=>$this->fecha_dev
+        ];
+    }
+    static function deserializar(array $datos): ModelBase
+    {
+        return new Self(
+            id: $datos['id'] === null ? 0 : $datos['id'],
+            socio: $datos['socio'],
+            libro: $datos['libro'], 
+            fecha_desde: $datos['fecha_desde'],
+            fecha_hasta: $datos['fecha_hasta'],
+            fecha_dev: $datos['fecha_dev']      
+        );
+    }
 }

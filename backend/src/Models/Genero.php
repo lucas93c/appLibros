@@ -6,31 +6,62 @@ use Raiz\Models\ModelBase;
 
 class Genero extends ModelBase
 {    
-/*Atributos de la clase Genero:
-id (int)
-descripcion (string)*/
-    private $id_genero;
-    private $descripcion_genero;
+/*
+Atributos de la clase Genero:
+descripcion (string)
+activo (int) valor 0 o 1
+*/
+    
+private $descripcion;
+private $activo;
 
-    public function __construct(int $id_genero, string $descripcion_genero)
-    {
-        $this->id_genero=$id_genero;
-        $this->descripcion_genero=$descripcion_genero;
-    }
+public function __construct(int $id, string $descripcion, int $activo)
+{
+    parent::__construct ($id);
+    $this->descripcion=$descripcion;
+    $this->activo=1;
+}
 
-    public function getId_genero ()
-    {
-        return $this->id_genero;
-    }
 
-    public function setDescripcion_genero ($nueva_descripcion_genero)
-    {
-        $this->descripcion_genero=$nueva_descripcion_genero;
-    }
 
-    public function getDescripcion_genero ()
-    {
-        return $this->descripcion_genero;
-    }
+public function setDescripcion ($nueva_descripcion)
+{
+    $this->descripcion=$nueva_descripcion;
+}
 
+public function getDescripcion()
+{
+    return $this->descripcion;
+}
+
+public function setActivo ($nuevo_activo)
+{
+    $this->activo=$nuevo_activo;
+}
+
+public function getActivo()
+{
+    return $this->activo;
+}
+
+public function serializar(): array
+{
+    return [
+        /* 
+        descripcion (string)
+        activo (int) valor 0 o 1
+        */
+        'id'=>$this->getId(),
+        'descripcion'=>$this->descripcion,
+        'activo'=>$this->activo
+    ];
+}
+static function deserializar(array $datos): ModelBase
+{
+    return new Self(
+        id: $datos['id'] === null ? 0 : $datos['id'],
+        descripcion: $datos['descripcion'],
+        activo: $datos['activo']           
+    );
+}
 }

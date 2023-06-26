@@ -26,8 +26,8 @@ Prestado
 siendo Activo el estado predeterminado. Estos estados son seteados con constante: 
 ejemplo: inicializamos estado:'$this->estado = static::ACTIVO' donde static::ACTIVO 
 corresponte a la constante Const ACTIVO = "activo"*/
-    private $id_libro;
-    private $titulo_libro;    
+    
+    private $titulo;    
     /** @var Editorial*/
     private $editorial;
     /** @var array Autor */
@@ -43,8 +43,8 @@ corresponte a la constante Const ACTIVO = "activo"*/
     const INACTIVO = 'inactivo';
     const PRESTADO = 'prestado';
 
-    public function __construct(int $id_libro,
-        string $titulo_libro,
+    public function __construct(int $id,
+        string $titulo,
         Editorial $editorial,
         Autor $autor,
         Genero $genero,
@@ -53,8 +53,8 @@ corresponte a la constante Const ACTIVO = "activo"*/
         int $anio_publicacion,
         string $estado = self :: ACTIVO )
     {
-        $this->id_libro=$id_libro;
-        $this->titulo_libro=$titulo_libro;
+        parent::__construct($id);
+        $this->titulo=$titulo;
         $this->editorial=$editorial; /* id editorial*/
         $this->autor=$autor; /* id autor */
         $this->genero=$genero; /* id genero */
@@ -63,10 +63,7 @@ corresponte a la constante Const ACTIVO = "activo"*/
         $this->anio_publicacion=$anio_publicacion;
     }
 
-    public function getId_libro ()
-    {
-        return $this->id_libro;
-    }
+   
 
     public function getEstado ()
     {
@@ -133,14 +130,53 @@ corresponte a la constante Const ACTIVO = "activo"*/
         return $this->editorial;
     }
 
-    public function setTitulo_libro ($nuevo_titulo_libro)
+    public function setTitulo ($nuevo_titulo)
     {
-        $this->titulo_libro=$nuevo_titulo_libro;
+        $this->titulo=$nuevo_titulo;
     }
 
-    public function getTitulo_libro ()
+    public function getTitulo ()
     {
-        $this->titulo_libro;
+        $this->titulo;
     }
+
+    public function serializar(): array
+    {
+        return [
+            /* 
+            titulo (string)
+            editorial (Editorial)
+            autor (Autor[])
+            genero (Genero)
+            cant_paginas (int)
+            anio_publicacion (int)
+            estado(string)
+            */
+            'id'=>$this->getId(),
+            'titulo'=>$this->titulo,
+            'editorial'=>$this->editorial,
+            'autor'=>$this->autor,
+            'genero'=>$this->genero,
+            'categoria'=>$this->categoria,
+            'cant_paginas'=>$this->cant_paginas,
+            'anio_publicacion'=>$this->anio_publicacion,
+            'estado'=>$this->estado
+        ];
+    }
+    static function deserializar(array $datos): ModelBase
+    {
+        return new Self(
+            id: $datos['id'] === null ? 0 : $datos['id'],
+            titulo: $datos['titulo'],
+            editorial: $datos['editorial'], 
+            autor: $datos['autor'],
+            genero: $datos['genero'],
+            categoria: $datos['categoria'],
+            cant_paginas: $datos['cant_paginas'],
+            anio_publicacion: $datos['anio_publicacion'],
+            estado: $datos['estado']       
+        );
+    }
+
 
 }

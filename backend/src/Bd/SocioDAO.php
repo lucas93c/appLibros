@@ -31,17 +31,28 @@ class SocioDAO implements InterfaceDAO
             return $socio;
         }
     }
+/*    
+
+Atributos de la clase Socio:
+nombre_apellido (string)
+fecha_alta (date)
+activo (int) valor 0 o 1
+telefono (int)
+direccion (string) */
 
     public static function crear(Serializador $instancia): void
     {
         $params = $instancia->serializar();
-        $sql = 'INSERT INTO socios (id, nombre_apellido, dni) VALUES (:id, :nombre_apellido, :dni)';
+        $sql = 'INSERT INTO socios (nombre_apellido, fecha_alta, activo, telefono, 
+        direccion) VALUES (:nombre_apellido, :fecha_alta, :activo, :telefono, :direccion)';
         ConectarBD::escribir(
             sql: $sql,
             params: [
-                ':id' => $params['id'],
                 ':nombre_apellido' => $params['nombre_apellido'],
-                ':dni' => $params['dni']
+                ':fecha_alta' => $params['fecha_alta'],
+                ':activo' => $params['activo'],
+                ':telefono' => $params['telefono'],
+                ':direccion' => $params['direccion']
             ]
         );
     }
@@ -49,12 +60,16 @@ class SocioDAO implements InterfaceDAO
     public static function actualizar(Serializador $instancia): void
     {
         $params = $instancia->serializar();
-        $sql = 'UPDATE socios SET nombre =:nombre WHERE id=:id';
+        $sql = 'UPDATE socios SET nombre_apellido =:nombre_apellido, fecha_alta =:fecha_alta, 
+        activo =:activo, telefono =:telefono, direccion =:direccion WHERE id=:id';
         ConectarBD::escribir(
             sql: $sql,
             params: [
-                ':id' => $params['id'],
-                ':nombre' => $params['nombre'],
+                ':nombre_apellido' => $params['nombre_apellido'],
+                ':fecha_alta' => $params['fecha_alta'],
+                ':activo' => $params['activo'],
+                ':telefono' => $params['telefono'],
+                ':direccion' => $params['direccion']
             ]
         );
     }

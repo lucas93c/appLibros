@@ -18,30 +18,27 @@ telefono (int)
 direccion (string) */
 
 private $nombre_apellido;
-private $fecha_alta_socio;
-private $activo_socio;
-private $telefono_socio;
-private $direccion_socio;
+private $fecha_alta;
+private $activo;
+private $telefono;
+private $direccion;
 
 function __construct(int $id, 
                     string $nombre_apellido,
-                    DateTime $fecha_alta_socio, 
-                    int $activo_socio, 
-                    int $telefono_socio, 
-                    string $direccion_socio)
+                    DateTime $fecha_alta, 
+                    int $activo, 
+                    int $telefono, 
+                    string $direccion)
     {
         parent::__construct($id);
         $this->nombre_apellido=$nombre_apellido;
-        $this->fecha_alta_socio=$fecha_alta_socio;
-        $this->activo_socio=$activo_socio;
-        $this->telefono_socio=$telefono_socio;
-        $this->direccion_socio=$direccion_socio;
+        $this->fecha_alta=$fecha_alta;
+        $this->activo=$activo;
+        $this->telefono=$telefono;
+        $this->direccion=$direccion;
     }
 
-    public function getId():int
-    {
-        return $this->id;
-    }
+   
 
     public function setNombre_apellido ($nuevo_nombre_apellido)
     {
@@ -53,44 +50,44 @@ function __construct(int $id,
         return $this->nombre_apellido;
     }
     
-    public function setFecha_alta_socio ($nueva_fecha_alta_socio)
+    public function setFecha_alta ($nueva_fecha_alta_socio)
     {
-        $this->fecha_alta_socio=$nueva_fecha_alta_socio;
+        $this->fecha_alta=$nueva_fecha_alta_socio;
     }
 
-    public function getFecha_alta_socio ()
+    public function getFecha_alta ()
     {
-        return $this->fecha_alta_socio;
+        return $this->fecha_alta;
     }
 
-    public function setActivo_socio ($nuevo_activo_socio)
+    public function setActivo ($nuevo_activo)
     {
-        $this->activo_socio=$nuevo_activo_socio;
+        $this->activo=$nuevo_activo;
     }
 
-    public function getActivo_socio ()
+    public function getActivo ()
     {
-        return $this->activo_socio;
+        return $this->activo;
     }
 
-    public function setTelefono_socio ($nuevo_telefono_socio)
+    public function setTelefono ($nuevo_telefono)
     {
-        $this->telefono_socio=$nuevo_telefono_socio;
+        $this->telefono=$nuevo_telefono;
     }
 
-    public function getTelefono_socio ()
+    public function getTelefono ()
     {
-        return $this->telefono_socio;
+        return $this->telefono;
     }
     
-    public function setDireccion_socio ($nueva_direccion_socio)
+    public function setDireccion ($nueva_direccion)
     {
-        $this->direccion_socio=$nueva_direccion_socio;
+        $this->direccion=$nueva_direccion;
     }
 
-    public function getDireccion_socio ()
+    public function getDireccion ()
     {
-        return $this->direccion_socio;
+        return $this->direccion;
     }
 
     public function serializar(): array
@@ -99,17 +96,17 @@ function __construct(int $id,
             /* 
             private $id;
             private $nombre_apellido;
-            private $fecha_alta_socio;
-            private $activo_socio;
-            private $telefono_socio;
-            private $direccion_socio;
+            private $fecha_alta;
+            private $activo;
+            private $telefono;
+            private $direccion;
             */
             'id'=>$this->getId(),
             'nombre_apellido'=>$this->getNombre_apellido(),
-            'fecha_alta_socio'=>$this->getFecha_alta_socio(),
-            'activo_socio'=>$this->getActivo_socio(),
-            'telefono_socio'=>$this->getTelefono_socio(),
-            'direccion_socio'=>$this->getDireccion_socio()
+            'fecha_alta'=>$this->getFecha_alta(),
+            'activo'=>$this->getActivo(),
+            'telefono'=>$this->getTelefono(),
+            'direccion'=>$this->getDireccion()
         ];
     }
     static function deserializar(array $datos): ModelBase
@@ -117,10 +114,10 @@ function __construct(int $id,
         return new Self(
             id: $datos['id'] === null ? 0 : $datos['id'],
             nombre_apellido: $datos['nombre_apellido'],
-            fecha_alta_socio: $datos['fecha_alta_socio'], 
-            activo_socio: $datos['activo_socio'],
-            telefono_socio: $datos['telefono_socio'],
-            direccion_socio: $datos['direccion_socio']           
+            fecha_alta: $datos['fecha_alta'], 
+            activo: $datos['activo'],
+            telefono: $datos['telefono'],
+            direccion: $datos['direccion']           
         );
     }
 

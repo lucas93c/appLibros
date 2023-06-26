@@ -8,11 +8,10 @@ class Categoria extends ModelBase
 {
 /*
 Atributos de la clase Categoria:
-id (int)
 descripcion (string)
 activo (int) valor 0 o 1
 */
-    private $id;
+    
     private $descripcion;
     private $activo;
 
@@ -23,10 +22,7 @@ activo (int) valor 0 o 1
         $this->activo=1;
     }
 
-    public function getId () :int
-    {
-        return $this->id;
-    }
+   
 
     public function setDescripcion ($nueva_descripcion)
     {
@@ -52,11 +48,10 @@ activo (int) valor 0 o 1
     {
         return [
             /* 
-            id (int)
             descripcion (string)
             activo (int) valor 0 o 1
             */
-            'id'=>$this->id,
+            'id'=>$this->getId(),
             'descripcion'=>$this->descripcion,
             'activo'=>$this->activo
         ];

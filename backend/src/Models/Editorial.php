@@ -6,34 +6,62 @@ use Raiz\Models\ModelBase;
 
 class Editorial extends ModelBase
 {
-    /*
-    Atributos de la clase Editorial:
-    id (int)
-    Nombre (string)
-    */
+/*
+Atributos de la clase Editorial:
+Nombre (string)
+activo (int) valor 0 o 1
+*/
+    
+private $nombre;
+private $activo;
 
-    private $id_editorial;
-    private $nombre_editorial;
+public function __construct(int $id, string $nombre, int $activo)
+{
+    parent::__construct ($id);
+    $this->nombre=$nombre;
+    $this->activo=1;
+}
 
-    function __construct(int $id_editorial, string $nombre_editorial)
-    {
-        $this->id_editorial=$id_editorial;
-        $this->nombre_editorial=$nombre_editorial;
-    }
 
-    public function getId_editorial ()
-    {
-        return $this->id_editorial;
-    }
 
-    public function setNombre_editorial ($nuevo_nombre_editorial)
-    {
-        $this->nombre_editorial=$nuevo_nombre_editorial;
-    }
+public function setNombre ($nueva_nombre)
+{
+    $this->nombre=$nueva_nombre;
+}
 
-    public function getNombre_editorial ()
-    {
-        return $this->nombre_editorial;
-    }
+public function getNombre()
+{
+    return $this->nombre;
+}
 
+public function setActivo ($nuevo_activo)
+{
+    $this->activo=$nuevo_activo;
+}
+
+public function getActivo()
+{
+    return $this->activo;
+}
+
+public function serializar(): array
+{
+    return [
+        /*         
+        nombre (string)
+        activo (int) valor 0 o 1
+        */
+        'id'=>$this->getId(),
+        'nombre'=>$this->nombre,
+        'activo'=>$this->activo
+    ];
+}
+static function deserializar(array $datos): ModelBase
+{
+    return new Self(
+        id: $datos['id'] === null ? 0 : $datos['id'],
+        nombre: $datos['nombre'],
+        activo: $datos['activo']           
+    );
+}
 }

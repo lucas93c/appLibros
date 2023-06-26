@@ -3,10 +3,8 @@
 use Slim\Factory\AppFactory;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Raiz\Controllers\SocioController;
+use Raiz\Controllers\EditorialController;
 
-
-$app->addErrorMiddleware(displayErrorDetails: true, logErrors: true, logErrorDetails: true);
 
 
 // ---- RUTAS PARA TRABAJAR CON EL CONTROLADOR ---- // 
@@ -14,41 +12,40 @@ $app->addErrorMiddleware(displayErrorDetails: true, logErrors: true, logErrorDet
 // ************************************************ //
 // ---------- Listar todos los Registros ---------- //
 
-$app->get('/apiv1/socios', function (Request $req, Response $res, array $args) {
-    $payload = Json_Encode(SocioController::listar(), JSON_PRETTY_PRINT);
+$app->get('/apiv1/editoriales', function (Request $req, Response $res, array $args) {
+    $payload = Json_Encode(EditorialController::listar(), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
 });
 
 //  ****** ------ Buscar por Id ------- ************* //
 
-$app->get('/apiv1/socios/{id}', function (Request $req, Response $res, array $args) {
-    $payload = Json_Encode(SocioController::encontrarUno($args["id"]), JSON_PRETTY_PRINT);
+$app->get('/apiv1/editoriales/{id}', function (Request $req, Response $res, array $args) {
+    $payload = Json_Encode(EditorialController::encontrarUno($args["id"]), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
 });
 
 // ---- Crear nuevo regitro ---- //
 
-$app->post('/apiv1/socios/nuevo', function (Request $req, Response $res, array $args) {
-    $payload = Json_Encode(SocioController::crear($req->getQueryParams()), JSON_PRETTY_PRINT);
+$app->post('/apiv1/editoriales/nuevo', function (Request $req, Response $res, array $args) {
+    var_dump($req->getQueryParams());
+    $payload = Json_Encode(EditorialController::crear($req->getQueryParams()), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
 });
 
 // ---- Modificar registro existente ---- //
-$app->put('/apiv1/socios/{id}', function (Request $req, Response $res, array $args) {
-    $payload = Json_Encode(SocioController::actualizar($req->getQueryParams()), JSON_PRETTY_PRINT);
+$app->put('/apiv1/editoriales/{id}', function (Request $req, Response $res, array $args) {
+    $payload = Json_Encode(EditorialController::actualizar($req->getQueryParams()), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
 });
 
 // ---- Borrar registro existente ---- //
 
-$app->delete('apiv1/socios/{id}', function (Request $req, Response $res, array $args) {
-    $payload = Json_Encode(SocioController::borrar($args["id"]), JSON_PRETTY_PRINT);
+$app->delete('/apiv1/editoriales/{id}', function (Request $req, Response $res, array $args) {
+    $payload = Json_Encode(EditorialController::borrar($args["id"]), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
 });
-
-
