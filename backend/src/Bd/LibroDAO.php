@@ -2,7 +2,7 @@
 
 namespace Raiz\Bd;
 
-use Raiz\Models\Autor;
+
 use Raiz\Models\Libro;
 use Raiz\Aux\Serializador;
 use PDO;

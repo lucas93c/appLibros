@@ -120,4 +120,19 @@ fecha_dev (?date) este atributo se debe inicializar en null*/
             fecha_dev: $datos['fecha_dev']      
         );
     }
+    public function diasRetraso(): int {
+        $fechaDev = $this->fecha_hasta;
+        $fechaActual = new DateTime();
+        $diasRetraso = $fechaDev->diff($fechaActual);
+        if ($fechaActual > $fechaDev) {
+            return "Usted tiene $diasRetraso de demora";
+        }
+        else{
+            return 0;
+        }
+        
+    }
+
+
+
 }

@@ -1,7 +1,7 @@
 <?php
 
 namespace Raiz\Bd;
-
+use PDO;
 use Raiz\Aux\Serializador;
 use Raiz\Bd\InterfaceDAO;
 use Raiz\Models\Prestamo;
@@ -12,12 +12,19 @@ class PrestamoDAO implements InterfaceDAO
 
     public static function listar(): array
     {
-        $sql = 'SELECT * FROM prestamos';
-        $listaprestamos = ConectarBD::leer(sql: $sql);
+        
+        $sql = 'SELECT *  FROM  prestamos';
+        $cnx = ConectarBD::conectar();
+        $consulta = $cnx->prepare($sql);
+        $consulta->execute();
+        $listaPrestamos = $consulta->fetchAll(PDO::FETCH_ASSOC);
         $prestamos = [];
-        foreach ($listaprestamos as $prestamo) {
+        foreach ($listaPrestamos as $prestamo) {
+            $prestamo['libro'] = LibroDAO::encontrarUno($prestamo['id_libro']);
+            $prestamo['socio'] = SocioDAO::encontrarUno($prestamo['id_socio']);     
             $prestamos[] = Prestamo::deserializar($prestamo);
         }
+        
         return $prestamos;
     }
 

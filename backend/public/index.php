@@ -12,5 +12,10 @@ $app->addErrorMiddleware(true, true, true);
 
 // ----- Agregar las Rutas de cada Controlador ------ //
 require_once('../rutas/socioRoutes.php');
-
+require_once('../rutas/autoresRoutes.php');
+require_once('../rutas/categoriasRoutes.php');
+require_once('../rutas/editorialesRoutes.php');
+require_once('../rutas/generosRoutes.php');
+require_once('../rutas/librosRoutes.php');
+require_once('../rutas/prestamosRoutes.php');
 $app->run();
