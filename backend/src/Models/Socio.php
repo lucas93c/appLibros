@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 namespace Raiz\Models;
-use DateTime;
 
 
 class Socio extends ModelBase{
@@ -25,7 +24,7 @@ private $direccion;
 
 function __construct(int $id, 
                     string $nombre_apellido,
-                    DateTime $fecha_alta, 
+                    string $fecha_alta, 
                     int $activo, 
                     int $telefono, 
                     string $direccion)

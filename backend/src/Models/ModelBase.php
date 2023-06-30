@@ -2,24 +2,13 @@
 
 namespace Raiz\Models;
 
-use Raiz\Aux\Serializador;
+use Raiz\_Aux\Serializador;
 use Error;
 
 abstract class ModelBase implements Serializador
 
-{     
+{   
     private $id;
-    public function __construct(mixed $id)
-    {
-        $this->id=$this->setId($id);
-    }
-
-    
-    public function getId(): int
-    {
-        return $this->id;
-    }
-    
     public function setId($id): mixed
     {
         if ($id === null) :
@@ -29,6 +18,15 @@ abstract class ModelBase implements Serializador
         endif;
     }
 
+    public function __construct(mixed $id)
+    {
+        $this->id=$this->setId($id);
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
     /** @return mixed[] */
     public function serializar(): array
     {

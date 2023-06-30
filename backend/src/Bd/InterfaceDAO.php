@@ -1,7 +1,7 @@
 <?php
 namespace Raiz\Bd;
 
-use Raiz\Aux\Serializador;
+use Raiz\_Aux\Serializador;
 use Raiz\Models\ModelBase;
 
 interface InterfaceDao{

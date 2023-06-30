@@ -2,7 +2,7 @@
 
 namespace Raiz\Bd;
 
-use Raiz\Aux\Serializador;
+use Raiz\_Aux\Serializador;
 use Raiz\Bd\InterfaceDAO;
 use Raiz\Models\Socio;
 
@@ -60,14 +60,12 @@ direccion (string) */
     public static function actualizar(Serializador $instancia): void
     {
         $params = $instancia->serializar();
-        $sql = 'UPDATE socios SET nombre_apellido =:nombre_apellido, fecha_alta =:fecha_alta, 
-        activo =:activo, telefono =:telefono, direccion =:direccion WHERE id=:id';
+        $sql = 'UPDATE socios SET nombre_apellido =:nombre_apellido, telefono =:telefono, direccion =:direccion WHERE id=:id';
         ConectarBD::escribir(
             sql: $sql,
             params: [
-                ':nombre_apellido' => $params['nombre_apellido'],
-                ':fecha_alta' => $params['fecha_alta'],
-                ':activo' => $params['activo'],
+                ':id' => $params['id'], 
+                ':nombre_apellido' => $params['nombre_apellido'],                
                 ':telefono' => $params['telefono'],
                 ':direccion' => $params['direccion']
             ]
