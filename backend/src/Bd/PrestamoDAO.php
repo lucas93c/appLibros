@@ -2,7 +2,7 @@
 
 namespace Raiz\Bd;
 use PDO;
-use Raiz\Aux\Serializador;
+use Raiz\_Aux\Serializador;
 use Raiz\Bd\InterfaceDAO;
 use Raiz\Models\Prestamo;
 
