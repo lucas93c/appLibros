@@ -43,7 +43,7 @@ direccion (string) */
     public static function crear(Serializador $instancia): void
     {
         $params = $instancia->serializar();
-        $sql = 'INSERT INTO socios (nombre_apellido, fecha_alta, activo, telefono, 
+        $sql = 'INSERT INTO socios ( nombre_apellido, fecha_alta, activo, telefono, 
         direccion) VALUES (:nombre_apellido, :fecha_alta, :activo, :telefono, :direccion)';
         ConectarBD::escribir(
             sql: $sql,
@@ -60,7 +60,7 @@ direccion (string) */
     public static function actualizar(Serializador $instancia): void
     {
         $params = $instancia->serializar();
-        $sql = 'UPDATE socios SET nombre_apellido =:nombre_apellido, telefono =:telefono, direccion =:direccion WHERE id=:id';
+        $sql = 'UPDATE socios SET nombre_apellido=:nombre_apellido, telefono=:telefono, direccion=:direccion WHERE id=:id';
         ConectarBD::escribir(
             sql: $sql,
             params: [

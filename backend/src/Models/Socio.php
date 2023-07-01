@@ -89,35 +89,29 @@ function __construct(int $id,
         return $this->direccion;
     }
 
+    public static function deserializar(array $datos): self
+    {
+        return new socio(
+            id: $datos['id'] === null ? 0 : intVal($datos['id']),
+            activo: intVal($datos["activo"]),
+            fecha_alta: $datos["fecha_alta"],
+            nombre_apellido: $datos["nombre_apellido"],
+            direccion: $datos["direccion"],
+            telefono: intVal($datos["telefono"])
+        );
+    }
+    /** @Return mixed[] */
     public function serializar(): array
     {
-        return [
-            /* 
-            private $id;
-            private $nombre_apellido;
-            private $fecha_alta;
-            private $activo;
-            private $telefono;
-            private $direccion;
-            */
+        $serializar = array(
             'id'=>$this->getId(),
-            'nombre_apellido'=>$this->getNombre_apellido(),
-            'fecha_alta'=>$this->getFecha_alta(),
-            'activo'=>$this->getActivo(),
-            'telefono'=>$this->getTelefono(),
-            'direccion'=>$this->getDireccion()
-        ];
-    }
-    static function deserializar(array $datos): ModelBase
-    {
-        return new Self(
-            id: $datos['id'] === null ? 0 : $datos['id'],
-            nombre_apellido: $datos['nombre_apellido'],
-            fecha_alta: $datos['fecha_alta'], 
-            activo: $datos['activo'],
-            telefono: $datos['telefono'],
-            direccion: $datos['direccion']           
+            "nombre_apellido" => $this->getNombre_apellido(), 
+            "activo" => $this->getActivo(), 
+            "fecha_alta" => $this->getFecha_alta(), 
+            "telefono" => $this->getTelefono(), 
+            "direccion" => $this->getDireccion()
         );
+        return $serializar;
     }
 
 }

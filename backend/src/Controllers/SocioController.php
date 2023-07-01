@@ -6,14 +6,7 @@ use Raiz\Models\Socio;
 
 class SocioController implements InterfaceController{
    
-    //Clase que controla de acuerdo a lo que pida la vista: 
-    // --- CRUD --- 
-    //  Listar 
-    //  encontrar uno
-    //  crear
-    //  actualizar
-    //  borrar  
-
+   
     public static function listar(): array
     {
         $socios = [];
@@ -58,8 +51,4 @@ class SocioController implements InterfaceController{
         SocioDAO::borrar($id);
         
     }
-    
-    
-
-
 }
