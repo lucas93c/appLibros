@@ -32,7 +32,7 @@ $app->get('/apiv1/categorias/{id}', function (Request $req, Response $res, array
 $app->post('/apiv1/categorias/nuevo', function (Request $req, Response $res, array $args) {
     var_dump($req->getQueryParams());
     $request = Utileria :: PasarAJson(file_get_contents('php://input'));
-    $payload = Json_Encode(CategoriaController::crear($req->getQueryParams()), JSON_PRETTY_PRINT);
+    $payload = Json_Encode(CategoriaController::crear($request), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
 });
@@ -40,7 +40,7 @@ $app->post('/apiv1/categorias/nuevo', function (Request $req, Response $res, arr
 // ---- Modificar registro existente ---- //
 $app->put('/apiv1/categorias/{id}', function (Request $req, Response $res, array $args) {
     $request = Utileria :: PasarAJson(file_get_contents('php://input'));
-    $payload = Json_Encode(CategoriaController::actualizar($req->getQueryParams()), JSON_PRETTY_PRINT);
+    $payload = Json_Encode(CategoriaController::actualizar($request), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
 });
